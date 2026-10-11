@@ -1,0 +1,57 @@
+{
+  "name": "fast-sorted-set",
+  "version": "1.0.0",
+  "description": "Production-grade, zero-dependency in-memory Sorted Set engine for Node.js and TypeScript. Powered by Redis-style SkipList with Span pointers for O(log N) rank operations, real-time gaming leaderboards, and priority queuing.",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "assets"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test --test-force-exit tests/**/*.test.ts",
+    "test:benchmark": "node --import tsx tests/benchmark.test.ts",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamrakiburrahman/fast-sorted-set.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iamrakiburrahman/fast-sorted-set/issues"
+  },
+  "homepage": "https://github.com/iamrakiburrahman/fast-sorted-set#readme",
+  "keywords": [
+    "sorted-set",
+    "skiplist",
+    "leaderboard",
+    "redis",
+    "zset",
+    "in-memory",
+    "ranking",
+    "priority-queue",
+    "system-design",
+    "gaming-leaderboard",
+    "typescript"
+  ],
+  "author": "Rakibur Rahman (https://github.com/iamrakiburrahman)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
