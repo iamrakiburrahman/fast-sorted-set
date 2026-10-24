@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="flowBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e1b4b" />
+    </linearGradient>
+    <linearGradient id="clientGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+    <linearGradient id="serverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+    <linearGradient id="ramGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="dbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <marker id="flowArrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="greenArrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+    </marker>
+    <marker id="amberArrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24"/>
+    </marker>
+    <filter id="fShadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="950" height="420" rx="16" fill="url(#flowBg)" stroke="#312e81" stroke-width="1.5"/>
+
+  <!-- Title Badge -->
+  <rect x="35" y="25" width="480" height="38" rx="8" fill="#1e1b4b" stroke="#4338ca"/>
+  <text x="50" y="50" font-family="sans-serif" font-size="15" font-weight="700" fill="#a5b4fc">🎮 Real-Time Leaderboard System Architecture</text>
+
+  <!-- 1. Client -->
+  <g transform="translate(40, 150)" filter="url(#fShadow)">
+    <rect width="180" height="150" rx="12" fill="url(#clientGrad)" stroke="#818cf8"/>
+    <text x="90" y="35" font-family="sans-serif" font-size="16" font-weight="800" fill="#fff" text-anchor="middle">📱 Game Client</text>
+    <rect x="15" y="48" width="150" height="1" fill="#c7d2fe" opacity="0.4"/>
+    <text x="25" y="80" font-family="sans-serif" font-size="12" fill="#e0e7ff">• Player wins match</text>
+    <text x="25" y="105" font-family="sans-serif" font-size="12" fill="#e0e7ff">• Requests Top 10</text>
+    <text x="25" y="130" font-family="sans-serif" font-size="12" fill="#e0e7ff">• Views player rank</text>
+  </g>
+
+  <!-- Arrow 1: Client -> Backend -->
+  <path d="M 230 200 L 330 200" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#flowArrow)"/>
+  <text x="280" y="190" font-family="sans-serif" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">HTTP / WS</text>
+
+  <!-- 2. Backend Server -->
+  <g transform="translate(340, 130)" filter="url(#fShadow)">
+    <rect width="200" height="190" rx="12" fill="url(#serverGrad)" stroke="#60a5fa"/>
+    <text x="100" y="32" font-family="sans-serif" font-size="16" font-weight="800" fill="#fff" text-anchor="middle">⚙️ Game Service</text>
+    <rect x="15" y="45" width="170" height="1" fill="#bfdbfe" opacity="0.4"/>
+    <text x="20" y="75" font-family="sans-serif" font-size="12" fill="#dbeafe">• Game Logic &amp; Win Rules</text>
+    <text x="20" y="100" font-family="sans-serif" font-size="12" fill="#dbeafe">• Dual-Path Dispatch:</text>
+    
+    <rect x="20" y="115" width="160" height="28" rx="6" fill="#1e3a8a"/>
+    <text x="100" y="134" font-family="sans-serif" font-size="11" font-weight="700" fill="#93c5fd" text-anchor="middle">1. Instant RAM Update</text>
+
+    <rect x="20" y="150" width="160" height="28" rx="6" fill="#1e3a8a"/>
+    <text x="100" y="169" font-family="sans-serif" font-size="11" font-weight="700" fill="#93c5fd" text-anchor="middle">2. Background DB Sync</text>
+  </g>
+
+  <!-- Arrow 2A: Backend -> RAM -->
+  <path d="M 550 170 L 650 140" stroke="#10b981" stroke-width="2.5" marker-end="url(#greenArrow)"/>
+  <text x="595" y="145" font-family="sans-serif" font-size="11" font-weight="700" fill="#10b981">addPoints()</text>
+
+  <!-- Arrow 2B: Backend -> DB -->
+  <path d="M 550 250 L 650 280" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4" marker-end="url(#amberArrow)"/>
+  <text x="590" y="285" font-family="sans-serif" font-size="11" font-weight="700" fill="#fbbf24">Async UPDATE</text>
+
+  <!-- 3. fast-sorted-set (RAM) -->
+  <g transform="translate(660, 90)" filter="url(#fShadow)">
+    <rect width="250" height="120" rx="12" fill="url(#ramGrad)" stroke="#34d399" stroke-width="2"/>
+    <text x="125" y="28" font-family="sans-serif" font-size="15" font-weight="800" fill="#fff" text-anchor="middle">⚡ fast-sorted-set (RAM)</text>
+    <rect x="15" y="38" width="220" height="1" fill="#a7f3d0" opacity="0.4"/>
+    <text x="20" y="60" font-family="sans-serif" font-size="12" fill="#ecfdf5">• SkipList + Span Pointers</text>
+    <text x="20" y="80" font-family="sans-serif" font-size="12" fill="#ecfdf5">• Reads return in &lt; 0.05 ms!</text>
+    <text x="20" y="102" font-family="sans-serif" font-size="12" font-weight="700" fill="#fff">🚀 Zero Database Table Scans</text>
+  </g>
+
+  <!-- 4. Database (Disk) -->
+  <g transform="translate(660, 240)" filter="url(#fShadow)">
+    <rect width="250" height="120" rx="12" fill="url(#dbGrad)" stroke="#fcd34d"/>
+    <text x="125" y="28" font-family="sans-serif" font-size="15" font-weight="800" fill="#fff" text-anchor="middle">💾 Database (Disk / SSD)</text>
+    <rect x="15" y="38" width="220" height="1" fill="#fde68a" opacity="0.4"/>
+    <text x="20" y="60" font-family="sans-serif" font-size="12" fill="#fffbeb">• PostgreSQL / MongoDB</text>
+    <text x="20" y="80" font-family="sans-serif" font-size="12" fill="#fffbeb">• Stores: Profiles, Emails, Avatars</text>
+    <text x="20" y="102" font-family="sans-serif" font-size="12" fill="#fffbeb">• Permanent Source of Truth</text>
+  </g>
+</svg>

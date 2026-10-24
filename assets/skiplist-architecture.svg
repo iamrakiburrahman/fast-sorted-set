@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117" />
+      <stop offset="100%" stop-color="#161b22" />
+    </linearGradient>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+    <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#21262d" />
+      <stop offset="100%" stop-color="#161b22" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="950" height="480" rx="16" fill="url(#bgGrad)" stroke="#30363d" stroke-width="1.5"/>
+
+  <!-- Title Badge -->
+  <rect x="35" y="25" width="460" height="38" rx="8" fill="#1e293b" stroke="#334155"/>
+  <text x="50" y="50" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="16" font-weight="700" fill="#38bdf8">⚡ SkipList with Span Pointers (Redis Architecture)</text>
+
+  <!-- Search Path Highlight Note -->
+  <rect x="580" y="25" width="335" height="38" rx="8" fill="#064e3b" stroke="#047857"/>
+  <text x="595" y="50" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" font-weight="600" fill="#6ee7b7">🔍 O(log N) Rank: Sum of Spans = 1 + 2 + 1 = 4</text>
+
+  <!-- Level Labels -->
+  <g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="700">
+    <text x="35" y="130" fill="#94a3b8">LEVEL 3</text>
+    <text x="35" y="210" fill="#94a3b8">LEVEL 2</text>
+    <text x="35" y="290" fill="#94a3b8">LEVEL 1</text>
+    <text x="35" y="380" fill="#64748b">BACKWARD</text>
+  </g>
+
+  <!-- HEADER TOWER -->
+  <g transform="translate(120, 90)" filter="url(#shadow)">
+    <rect width="80" height="230" rx="8" fill="url(#headerGrad)" stroke="#60a5fa" stroke-width="1.5"/>
+    <text x="40" y="28" font-family="sans-serif" font-size="14" font-weight="800" fill="#fff" text-anchor="middle">HEADER</text>
+    <rect x="10" y="38" width="60" height="1" fill="#93c5fd" opacity="0.4"/>
+    
+    <!-- Slots -->
+    <rect x="15" y="50" width="50" height="26" rx="4" fill="#1e3a8a"/>
+    <text x="40" y="68" font-family="sans-serif" font-size="12" font-weight="700" fill="#bfdbfe" text-anchor="middle">L3</text>
+
+    <rect x="15" y="130" width="50" height="26" rx="4" fill="#1e3a8a"/>
+    <text x="40" y="148" font-family="sans-serif" font-size="12" font-weight="700" fill="#bfdbfe" text-anchor="middle">L2</text>
+
+    <rect x="15" y="210" width="50" height="26" rx="4" fill="#1e3a8a"/>
+    <text x="40" y="228" font-family="sans-serif" font-size="12" font-weight="700" fill="#bfdbfe" text-anchor="middle">L1</text>
+  </g>
+
+  <!-- NODE 1: Alice (100) - Level 1 -->
+  <g transform="translate(280, 250)" filter="url(#shadow)">
+    <rect width="110" height="70" rx="8" fill="url(#nodeGrad)" stroke="#30363d" stroke-width="1.5"/>
+    <rect x="0" y="0" width="110" height="26" rx="8" fill="#1e293b"/>
+    <text x="55" y="18" font-family="sans-serif" font-size="12" font-weight="700" fill="#f8fafc" text-anchor="middle">alice (100)</text>
+    <rect x="25" y="34" width="60" height="26" rx="4" fill="#334155"/>
+    <text x="55" y="52" font-family="sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">L1</text>
+  </g>
+
+  <!-- NODE 2: Bob (250) - Level 2 -->
+  <g transform="translate(470, 170)" filter="url(#shadow)">
+    <rect width="110" height="150" rx="8" fill="url(#nodeGrad)" stroke="#30363d" stroke-width="1.5"/>
+    <rect x="0" y="0" width="110" height="26" rx="8" fill="#1e293b"/>
+    <text x="55" y="18" font-family="sans-serif" font-size="12" font-weight="700" fill="#f8fafc" text-anchor="middle">bob (250)</text>
+    
+    <rect x="25" y="45" width="60" height="26" rx="4" fill="#334155"/>
+    <text x="55" y="63" font-family="sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">L2</text>
+
+    <rect x="25" y="115" width="60" height="26" rx="4" fill="#334155"/>
+    <text x="55" y="133" font-family="sans-serif" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">L1</text>
+  </g>
+
+  <!-- NODE 3: Charlie (400) - Level 3 -->
+  <g transform="translate(680, 90)" filter="url(#shadow)">
+    <rect width="120" height="230" rx="8" fill="url(#nodeGrad)" stroke="#10b981" stroke-width="2"/>
+    <rect x="0" y="0" width="120" height="26" rx="8" fill="url(#accentGrad)"/>
+    <text x="60" y="18" font-family="sans-serif" font-size="12" font-weight="800" fill="#fff" text-anchor="middle">charlie (400)</text>
+
+    <rect x="30" y="50" width="60" height="26" rx="4" fill="#064e3b"/>
+    <text x="60" y="68" font-family="sans-serif" font-size="12" font-weight="700" fill="#6ee7b7" text-anchor="middle">L3</text>
+
+    <rect x="30" y="130" width="60" height="26" rx="4" fill="#064e3b"/>
+    <text x="60" y="148" font-family="sans-serif" font-size="12" font-weight="700" fill="#6ee7b7" text-anchor="middle">L2</text>
+
+    <rect x="30" y="210" width="60" height="26" rx="4" fill="#064e3b"/>
+    <text x="60" y="228" font-family="sans-serif" font-size="12" font-weight="700" fill="#6ee7b7" text-anchor="middle">L1</text>
+  </g>
+
+  <!-- POINTERS & SPANS -->
+  <!-- Level 3: Header -> Charlie (Span: 3) -->
+  <path d="M 200 152 L 670 152" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="400" y="135" width="70" height="24" rx="12" fill="#0369a1" stroke="#38bdf8"/>
+  <text x="435" y="152" font-family="sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">span: 3</text>
+
+  <!-- Level 2: Header -> Bob (Span: 2) -->
+  <path d="M 200 232 L 460 232" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="300" y="218" width="65" height="22" rx="11" fill="#0f172a" stroke="#0284c7"/>
+  <text x="332" y="234" font-family="sans-serif" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">span: 2</text>
+
+  <!-- Level 2: Bob -> Charlie (Span: 1) -->
+  <path d="M 580 232 L 670 232" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="605" y="218" width="55" height="22" rx="11" fill="#0f172a" stroke="#0284c7"/>
+  <text x="632" y="234" font-family="sans-serif" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">span: 1</text>
+
+  <!-- Level 1: Header -> Alice (Span: 1) -->
+  <path d="M 200 312 L 270 312" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Level 1: Alice -> Bob (Span: 1) -->
+  <path d="M 390 312 L 460 312" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Level 1: Bob -> Charlie (Span: 1) -->
+  <path d="M 580 312 L 670 312" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Backward Pointers (Doubly Linked on Level 1) -->
+  <path d="M 680 350 L 590 350" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrowAmber)"/>
+  <path d="M 470 350 L 400 350" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrowAmber)"/>
+  <path d="M 280 350 L 210 350" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#arrowAmber)"/>
+
+  <!-- Footer Legend -->
+  <rect x="35" y="415" width="880" height="42" rx="8" fill="#161b22" stroke="#30363d"/>
+  <circle cx="55" cy="436" r="6" fill="#38bdf8"/>
+  <text x="70" y="440" font-family="sans-serif" font-size="12" fill="#cbd5e1">Forward Skip Pointers (Express Lanes)</text>
+
+  <circle cx="340" cy="436" r="6" fill="#10b981"/>
+  <text x="355" y="440" font-family="sans-serif" font-size="12" fill="#cbd5e1">Level Span Counts (O(log N) Rank)</text>
+
+  <circle cx="620" cy="436" r="6" fill="#f59e0b"/>
+  <text x="635" y="440" font-family="sans-serif" font-size="12" fill="#cbd5e1">Backward Traversal (Reverse Slices)</text>
+</svg>
